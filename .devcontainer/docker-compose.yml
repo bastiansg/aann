@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+    aann-devcontainer:
+        network_mode: host
+        image: aann-devcontainer
+        container_name: aann-devcontainer
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        volumes:
+            - ..:/workspace:cached
+        # Please do not comment or remove this line!
+        command: /bin/sh -c "while sleep 1000; do :; done"

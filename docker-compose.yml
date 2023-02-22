@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+    aann-core:
+        image: ${CORE_IMAGE}
+        container_name: aann-core
+        build:
+            context: .
+            dockerfile: ./build/core/Dockerfile
+            args:
+                - PYTHON_VERSION=${PYTHON_VERSION}
+                - PIP_VERSION=${PIP_VERSION}
+                - PYTORCH_VERSION=${PYTORCH_VERSION}
+                - CUDA_VERSION=${CUDA_VERSION}
+        volumes:
+            - $PWD/${RESOURCES_VOLUME_MOUNT}
+        env_file:
+            - .env
+
+    aann-jupyter:
+        image: ${JUPYTER_IMAGE}
+        container_name: aann-jupyter
+        build:
+            context: .
+            dockerfile: ./build/jupyter/Dockerfile
+            args:
+                - CORE_IMAGE=${CORE_IMAGE}
+
+    aann-jupyter-gpu:
+        network_mode: host
+        image: ${JUPYTER_IMAGE}
+        container_name: aann-jupyter-gpu
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - capabilities: [ gpu ]
+        shm_size: '16gb'
+        volumes:
+            - $PWD/${SRC_VOLUME_MOUNT}
+            - $PWD/${NOTEBOOKS_VOLUME_MOUNT}
+            - $PWD/${RESOURCES_VOLUME_MOUNT}
+        env_file:
+            - .env
+
+    aann-jupyter-cpu:
+        network_mode: host
+        image: ${JUPYTER_IMAGE}
+        container_name: aann-jupyter-cpu
+        shm_size: '16gb'
+        volumes:
+            - $PWD/${SRC_VOLUME_MOUNT}
+            - $PWD/${NOTEBOOKS_VOLUME_MOUNT}
+            - $PWD/${RESOURCES_VOLUME_MOUNT}
+        env_file:
+            - .env
