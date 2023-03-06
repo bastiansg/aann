@@ -34,7 +34,7 @@
 				}
 			},
 			"extensions": [
-				"ms-python.vscode-pylance",
+				"ms-python.python",
 				"eamodio.gitlens",
 				"njpwerner.autodocstring",
 				"ms-azuretools.vscode-docker",

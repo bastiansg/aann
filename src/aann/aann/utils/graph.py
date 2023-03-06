@@ -1,5 +1,5 @@
-import graph_tool.all as gt
 import networkx as nx
+import graph_tool.all as gt
 
 from uuid import uuid1
 

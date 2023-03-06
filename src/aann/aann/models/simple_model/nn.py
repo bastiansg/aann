@@ -2,6 +2,8 @@ import torch
 import warnings
 
 from torch import nn
+import torch.nn.functional as F
+
 from torch.optim import Adam
 from torch.optim import Optimizer
 from torch.nn import CrossEntropyLoss
@@ -20,7 +22,7 @@ class Model(LightningModule):
         device: str,
         train_dl: DataLoader,
         num_in_features: int,
-        num_hidden: int,
+        # num_hidden: int,
         num_classes: int,
         lr: float = 1e-2,
     ):
@@ -30,10 +32,10 @@ class Model(LightningModule):
         self.train_dl = train_dl
         self.lr = lr
 
-        self.lin1 = nn.Linear(num_in_features, num_hidden, bias=False)
-        self.sig1 = nn.Sigmoid()
+        # self.lin1 = nn.Linear(num_in_features, num_hidden, bias=False)
+        # self.sig1 = nn.Sigmoid()
 
-        self.lin_out = nn.Linear(num_hidden, num_classes, bias=False)
+        self.lin_out = nn.Linear(num_in_features, num_classes, bias=False)
 
         self.ce_loss = CrossEntropyLoss()
         self.f1 = F1Score(
@@ -43,9 +45,10 @@ class Model(LightningModule):
         )
 
     def forward(self, img_features: torch.Tensor) -> torch.Tensor:
-        x = self.lin1(img_features)
-        x = self.sig1(x)
+        # x = self.lin1(img_features)
+        # x = self.sig1(x)
 
+        x = F.dropout(img_features, p=0.7, training=self.training)
         x = self.lin_out(x)
 
         return x
@@ -72,10 +75,10 @@ class Model(LightningModule):
         img_features = batch["img_features"].to(self.device_)
         x_out = self.forward(img_features=img_features)
 
-        preds = x_out.softmax(dim=1)
-        preds = preds.argmax(dim=1)
+        confs = x_out.softmax(dim=1)
+        preds = confs.argmax(dim=1)
 
-        return preds
+        return preds, confs
 
     def train_dataloader(self):
         return self.train_dl

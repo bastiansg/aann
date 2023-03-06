@@ -1,6 +1,8 @@
 import os
 import torch
 
+import numpy as np
+
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks.progress import RichProgressBar
 
@@ -17,13 +19,13 @@ class SimpleModel(TrainModule):
         self,
         num_in_features: int,
         num_classes: int,
-        num_hidden: int = 8,
+        # num_hidden: int = 8,
         device: str = "cpu",
         max_epochs: int = 50,
         save_path: str = "/resources/models/simple-model/model.pt",
     ):
         self.num_in_features = num_in_features
-        self.num_hidden = num_hidden
+        # self.num_hidden = num_hidden
         self.num_classes = num_classes
 
         self.device = device
@@ -48,7 +50,7 @@ class SimpleModel(TrainModule):
             device=self.device,
             train_dl=train_dl,
             num_in_features=self.num_in_features,
-            num_hidden=self.num_hidden,
+            # num_hidden=self.num_hidden,
             num_classes=self.num_classes,
         )
 
@@ -70,10 +72,15 @@ class SimpleModel(TrainModule):
 
         return preds
 
-    def dataset_item_predict(self, dataset_item: dict) -> int:
+    def dataset_item_predict(
+        self, dataset_item: dict
+    ) -> tuple[int, np.ndarray]:
         dp_dataset = IterableWrapper(iter([dataset_item]), deepcopy=False)
         dp_dataset = dp_dataset.sharding_filter()
         dl = self.dataset2dl(dp_dataset)
 
-        pred = self.trainer.predict(self.model, dl)[0].item()
-        return pred
+        pred, confs = self.trainer.predict(self.model, dl)[0]
+        pred = pred.item()
+        confs = confs.numpy()[0]
+
+        return pred, confs
