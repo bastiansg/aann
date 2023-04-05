@@ -20,7 +20,7 @@ class SimpleModel(TrainModule):
         num_in_features: int,
         num_classes: int,
         # num_hidden: int = 8,
-        device: str = "cpu",
+        device: str = "cuda",
         max_epochs: int = 50,
         save_path: str = "/resources/models/simple-model/model.pt",
     ):

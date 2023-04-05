@@ -37,8 +37,7 @@
 				"ms-python.python",
 				"eamodio.gitlens",
 				"njpwerner.autodocstring",
-				"ms-azuretools.vscode-docker",
-				"ottostreifel.cloudbuild-helper"
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	},
