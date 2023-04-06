@@ -22,7 +22,8 @@ class SimpleModel(TrainModule):
         # num_hidden: int = 8,
         device: str = "cuda",
         max_epochs: int = 50,
-        save_path: str = "/resources/models/simple-model/model.pt",
+        save_path: str = "/resources/models/simple-model",
+        model_name: str = "model",
     ):
         self.num_in_features = num_in_features
         # self.num_hidden = num_hidden
@@ -30,7 +31,7 @@ class SimpleModel(TrainModule):
 
         self.device = device
         self.max_epochs = max_epochs
-        self.save_path = save_path
+        self.save_path = f"{save_path}/{model_name}.pt"
 
     def get_trainer(self) -> Trainer:
         trainer = Trainer(
@@ -58,7 +59,8 @@ class SimpleModel(TrainModule):
         self.trainer.fit(self.model)
 
     def save(self):
-        create_path(os.path.dirname(self.save_path), overwrite=True)
+        # create_path(os.path.dirname(self.save_path), overwrite=True)
+        create_path(os.path.dirname(self.save_path))
         torch.save(self.model, self.save_path)
 
     def load(self):
