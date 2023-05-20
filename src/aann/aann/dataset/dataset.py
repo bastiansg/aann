@@ -11,9 +11,11 @@ class Dataset:
         self,
         base_images: dict = base_images,
         items_per_class: int = 1_000,
+        shuffle: bool = True,
     ):
         self.base_images = base_images
         self.items_per_class = items_per_class
+        self.shuffle = shuffle
 
         self.num_in_features = len(list(flatten(base_images[0]["image"])))
         self.num_classes = len(base_images)
@@ -31,7 +33,10 @@ class Dataset:
     def load(self):
         dp = IterableWrapper(iter(self.base_images), deepcopy=False)
         dp = dp.map(self.get_dataset_item)
-        dp = dp.repeat(self.items_per_class)
-        dp = dp.shuffle()
+        if self.items_per_class > 1:
+            dp = dp.repeat(self.items_per_class)
+
+        if self.shuffle:
+            dp = dp.shuffle()
 
         self.train = dp.sharding_filter()

@@ -25,6 +25,7 @@ class Model(LightningModule):
         # num_hidden: int,
         num_classes: int,
         lr: float = 1e-2,
+        # lr: float = 1e-4,
     ):
         super().__init__()
 
@@ -48,7 +49,12 @@ class Model(LightningModule):
         # x = self.lin1(img_features)
         # x = self.sig1(x)
 
-        x = F.dropout(img_features, p=0.7, training=self.training)
+        x = F.dropout(
+            img_features,
+            p=0.7,
+            # p=0.0,
+            training=self.training,
+        )
         x = self.lin_out(x)
 
         return x
