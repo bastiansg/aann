@@ -6,12 +6,11 @@ The Analog Artificial Neural Network (AANN) project involves creating a simple n
 ## Continuous Neural Network Graph
 
 This graph illustrates the continuous representation of the neural network.
-![](assets/continuous-graph.png)
+![](assets/continuous-graph-mini.png)
 
 ## Discretized Neural Network Graph
 This graph shows the discretized version of the neural network.
-![](assets/discretized-graph.png)
+![](assets/discretized-graph-mini.png)
 
-## Installation
-The AANN device in operation.
+## The AANN device in operation.
 ![](assets/aann.gif)
