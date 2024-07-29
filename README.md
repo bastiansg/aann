@@ -9,5 +9,5 @@ The Analog Artificial Neural Network (AANN) project involves creating a simple n
 ### Discretized graph representation of the neural network
 ![](assets/discretized-graph-mini.png)
 
-### The AANN device in operation.
+### The AANN device in operation
 ![](assets/aann.gif)
