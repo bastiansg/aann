@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="AANN — Analog Artificial Neural Network."
+    />
+    <title>AANN</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --background: #09090b;
+        --foreground: #fafafa;
+        --muted: #a1a1aa;
+        --muted-foreground: #71717a;
+        --border: #27272a;
+        --accent: #e4e4e7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--background);
+        color: var(--foreground);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background: var(--background);
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      figure {
+        margin: 0;
+      }
+
+      .page {
+        width: min(100%, 760px);
+        margin: 0 auto;
+        padding: 56px 22px 40px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 10px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-text {
+        display: grid;
+        gap: 10px;
+      }
+
+      h1 {
+        max-width: 680px;
+        font-family:
+          "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.05;
+      }
+
+      .tagline {
+        max-width: 620px;
+        color: var(--foreground);
+        font-size: 1rem;
+      }
+
+      .portrait {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+      }
+
+      .portrait a,
+      .graph-gallery a,
+      .video-gallery a {
+        display: block;
+      }
+
+      .portrait img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 160ms ease;
+      }
+
+      .portrait:hover img {
+        opacity: 0.78;
+      }
+
+      .section {
+        padding: 30px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section:last-child {
+        border-bottom: 0;
+      }
+
+      h2 {
+        margin-bottom: 18px;
+        color: var(--foreground);
+        font-family:
+          "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+
+      .item {
+        display: grid;
+        gap: 8px;
+      }
+
+      .item + .item {
+        margin-top: 24px;
+      }
+
+      .item-header {
+        display: grid;
+        gap: 2px;
+      }
+
+      .item p {
+        max-width: 680px;
+        color: var(--muted);
+      }
+
+      .meta {
+        color: var(--muted-foreground);
+        font-family:
+          ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: 0.9rem;
+      }
+
+      .graph-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 14px;
+      }
+
+      .graph-gallery figure {
+        display: grid;
+        gap: 8px;
+      }
+
+      .graph-gallery img {
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: opacity 160ms ease;
+      }
+
+      .graph-gallery img:hover {
+        opacity: 0.78;
+      }
+
+      .graph-gallery figcaption {
+        color: var(--muted-foreground);
+        font-family:
+          ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: 0.8rem;
+      }
+
+      .section-note {
+        margin-top: 18px;
+        color: var(--muted);
+      }
+
+      .video-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 14px;
+      }
+
+      .video-gallery figure {
+        display: grid;
+        gap: 8px;
+      }
+
+      .video-gallery video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 464 / 848;
+        background: var(--border);
+        object-fit: contain;
+        transition: opacity 160ms ease;
+      }
+
+      .video-gallery video:hover {
+        opacity: 0.78;
+      }
+
+      .video-gallery figcaption {
+        color: var(--muted-foreground);
+        font-family:
+          ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 720px) {
+        .page {
+          padding-top: 34px;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          align-items: start;
+        }
+
+        .portrait {
+          width: 100%;
+          height: 190px;
+          margin-top: 14px;
+        }
+
+        .graph-gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .video-gallery {
+          grid-template-columns: 1fr;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div class="hero-text">
+          <h1>AANN</h1>
+          <p class="tagline">A neural network made visible with light.</p>
+        </div>
+        <figure class="portrait">
+          <a
+            href="assets/space-invaders.png"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="assets/space-invaders.png"
+              alt="Space Invaders image classification set"
+              width="512"
+              height="512"
+            />
+          </a>
+        </figure>
+      </header>
+
+      <section class="section" aria-labelledby="overview-title">
+        <h2 id="overview-title">[ overview ]</h2>
+        <article class="item">
+          <p>
+            AANN (Analog Artificial Neural Network) trains a small neural network
+            to recognize pixel-art Space Invaders. It then transforms what the
+            model has learned into groups of optical fibers. When an image is
+            presented, light travels through those fibers, making the
+            classification process visible inside a physical object.
+          </p>
+        </article>
+      </section>
+
+      <section class="section" aria-labelledby="graphs-title">
+        <h2 id="graphs-title">[ graph representation ]</h2>
+        <div class="graph-gallery">
+          <figure>
+            <a
+              href="assets/continuous-graph.png"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="assets/continuous-graph-mini.png"
+                alt="Continuous graph representation of the neural network"
+                width="512"
+                height="505"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>01 :: continuous / learned weights</figcaption>
+          </figure>
+          <figure>
+            <a
+              href="assets/discretized-graph.png"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="assets/discretized-graph-mini.png"
+                alt="Discretized graph representation of the neural network"
+                width="512"
+                height="507"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>02 :: discretized / physical map</figcaption>
+          </figure>
+        </div>
+        <p class="section-note">
+          Each line represents a learned weight: how strongly one input pixel
+          contributes to identifying a class. The continuous graph preserves the
+          differences between these weights. The discretized graph uses a 0.6
+          cutoff to remove weaker connections and keep the strongest ones,
+          producing a simpler map that can be physically constructed with
+          optical fibers.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="operation-title">
+        <h2 id="operation-title">[&ensp;records&ensp;]</h2>
+        <div class="video-gallery">
+          <figure>
+            <a
+              href="assets/video_2026-07-27_01-05-50.mp4"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open record 01 in a new tab"
+            >
+              <video autoplay muted loop playsinline preload="metadata">
+                <source
+                  src="assets/video_2026-07-27_01-05-50.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </a>
+            <figcaption>record :: 01</figcaption>
+          </figure>
+          <figure>
+            <a
+              href="assets/video_2026-07-27_01-06-12.mp4"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open record 02 in a new tab"
+            >
+              <video autoplay muted loop playsinline preload="metadata">
+                <source
+                  src="assets/video_2026-07-27_01-06-12.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </a>
+            <figcaption>record :: 02</figcaption>
+          </figure>
+          <figure>
+            <a
+              href="assets/video_2026-07-27_01-06-15.mp4"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open record 03 in a new tab"
+            >
+              <video autoplay muted loop playsinline preload="metadata">
+                <source
+                  src="assets/video_2026-07-27_01-06-15.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </a>
+            <figcaption>record :: 03</figcaption>
+          </figure>
+        </div>
+        <p class="section-note">
+          Each class is represented by a group of optical-fiber ends. Training
+          determines which input pixels connect to each group. When an image is
+          presented, its active pixels send light through those connections. The
+          group receiving the most active light paths indicates the model's
+          prediction.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

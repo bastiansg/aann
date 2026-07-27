@@ -2,13 +2,4 @@
 ![](assets/space-invaders.png)
 
 ## Overview
-The Analog Artificial Neural Network (AANN) project involves creating a simple neural network for classifying a small set of images. Once trained, the model is converted into a graph representation, which is then used to construct a physical device that visually represents the neural network's structure.
-
-### Continuous graph representation of the neural network
-![](assets/continuous-graph-mini.png)
-
-### Discretized graph representation of the neural network
-![](assets/discretized-graph-mini.png)
-
-### The AANN device in operation
-![](assets/aann.gif)
+AANN (Analog Artificial Neural Network) trains a small neural network to recognize pixel-art Space Invaders. It then transforms what the model has learned into groups of optical fibers. When an image is presented, light travels through those fibers, making the classification process visible inside a physical object.
