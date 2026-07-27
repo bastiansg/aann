@@ -336,12 +336,15 @@
           </figure>
         </div>
         <p class="section-note">
-          Each line represents a learned weight: how strongly one input pixel
-          contributes to identifying a class. The continuous graph preserves the
-          differences between these weights. The discretized graph uses a 0.6
-          cutoff to remove weaker connections and keep the strongest ones,
-          producing a simpler map that can be physically constructed with
-          optical fibers.
+          Each Space Invader image is an 8 × 8 pixel grid that is flattened into
+          an array of 64 values, represented by the graph's input nodes. Each
+          line represents a learned weight: how strongly one input pixel
+          contributes to identifying a class. The four larger terminal nodes
+          represent the four possible Space Invader classes. The continuous
+          graph preserves the differences between these weights. The discretized
+          graph uses a 0.6 cutoff to remove weaker connections and keep the
+          strongest ones, producing a simpler map that can be physically
+          constructed with optical fibers.
         </p>
       </section>
 
