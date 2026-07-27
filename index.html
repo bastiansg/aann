@@ -156,6 +156,19 @@
         font-size: 0.9rem;
       }
 
+      .source-link {
+        color: var(--muted);
+        font-family:
+          ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: 0.95rem;
+        text-decoration: none;
+      }
+
+      .source-link:hover,
+      .source-link:focus-visible {
+        color: var(--accent);
+      }
+
       .graph-gallery {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -391,6 +404,18 @@
           group receiving the most active light paths indicates the model's
           prediction.
         </p>
+      </section>
+
+      <section class="section" aria-labelledby="source-title">
+        <h2 id="source-title">[ source ]</h2>
+        <a
+          class="source-link"
+          href="https://github.com/bastiansg/aann"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          github.com/bastiansg/aann
+        </a>
       </section>
     </main>
   </body>
